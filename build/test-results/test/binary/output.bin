@@ -1,95 +1,8 @@
 [1;31m
 Start test 1[0m
-The coffee machine has:
-400 ml of water
-540 ml of milk
-120 ml of coffee beans
-9 disposable cups
-$550 of money
-!Write action (buy, fill, take): 
-> take
-Collecting $550 of money
-The coffee machine has:
-400 ml of water
-540 ml of milk
-120 ml of coffee beans
-9 disposable cups
-$0 of money
-[1;31m
-Start test 2[0m
-The coffee machine has:
-400 ml of water
-540 ml of milk
-120 ml of coffee beans
-9 disposable cups
-$550 of money
-!Write action (buy, fill, take): 
-> buy
-HWhat do you want to buy? 1 – espresso, 2 – latte, 3 – cappuccino:
-> 1
-The coffee machine has:
-150 ml of water
-540 ml of milk
-104 ml of coffee beans
-8 disposable cups
-$554 of money
-[1;31m
-Start test 3[0m
-The coffee machine has:
-400 ml of water
-540 ml of milk
-120 ml of coffee beans
-9 disposable cups
-$550 of money
-!Write action (buy, fill, take): 
-> buy
-HWhat do you want to buy? 1 – espresso, 2 – latte, 3 – cappuccino:
-> 2
-The coffee machine has:
-50 ml of water
-465 ml of milk
-100 ml of coffee beans
-8 disposable cups
-$557 of money
-[1;31m
-Start test 4[0m
-The coffee machine has:
-400 ml of water
-540 ml of milk
-120 ml of coffee beans
-9 disposable cups
-$550 of money
-!Write action (buy, fill, take): 
-> buy
-HWhat do you want to buy? 1 – espresso, 2 – latte, 3 – cappuccino:
-> 3
-The coffee machine has:
-200 ml of water
-440 ml of milk
-108 ml of coffee beans
-8 disposable cups
-$556 of money
-[1;31m
-Start test 5[0m
-The coffee machine has:
-400 ml of water
-540 ml of milk
-120 ml of coffee beans
-9 disposable cups
-$550 of money
-!Write action (buy, fill, take): 
-> fill
-#How much water do you want to add?
-> 2001
-"How much milk do you want to add?
-> 510
-*How much coffee beans do you want to add?
-> 101
--How much disposable cups do you want to add?
-> 21
-The coffee machine has:
-2401 ml of water
-1050 ml of milk
-221 ml of coffee beans
-30 disposable cups
-$550 of money
+-Write how many cups of coffee you will need:
+> 300
+&For 300 cups of coffee you will need:
+0 ml of water
+0 ml of milk
+0 g of coffee beans

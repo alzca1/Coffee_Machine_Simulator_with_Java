@@ -1,22 +1,21 @@
 package machine;
 
-
 import java.util.Scanner;
 
-public class InputHelper{
-    private static final Scanner scanner = new Scanner(System.in);
+public class InputHelper {
+    private final Scanner scanner = new Scanner(System.in);
 
-    public static int getInt(String message){
+    public int getInt(String message){
         System.out.println(message);
         return scanner.nextInt();
     }
 
-    public static String getString(String message){
+    public String getString(String message){
         System.out.println(message);
         return scanner.nextLine();
     }
 
-    public static void closeScanner(){
+    public void closeScanner(){
         scanner.close();
     }
 }
