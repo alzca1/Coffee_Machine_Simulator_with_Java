@@ -1,5 +1,8 @@
 package machine;
 
+import java.sql.Array;
+import java.util.Objects;
+
 public class CoffeeMachine {
 
     private Water water;
@@ -18,7 +21,7 @@ public class CoffeeMachine {
         this.inputHelper = new InputHelper();
     }
 
-    public void printMachineStatus(){
+    public void printMachineStatus() {
         System.out.println("The coffee machine has:");
         water.printStatus();
         milk.printStatus();
@@ -29,14 +32,49 @@ public class CoffeeMachine {
         System.out.println();
     }
 
-    public void showMenu(){
+    public void coffeeMenu() {
+        int action = inputHelper.getInt("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino");
+
+        switch(action){
+            case 1:
+                prepareCoffee(CoffeeRecipe.ESPRESSO);
+                break;
+            case 2:
+                prepareCoffee(CoffeeRecipe.LATTE);
+                break;
+            case 3:
+                prepareCoffee(CoffeeRecipe.CAPUCCINO);
+                break;
+            default:
+                System.out.println("Wrong action!");
+        }
+    }
+
+    public void prepareCoffee(CoffeeRecipe recipe){
+        water.subtractAmount(recipe.showWater());
+        milk.subtractAmount(recipe.showMilk());
+        coffeebeans.subtractAmount(recipe.showCoffeeBeans());
+        disposableCups.subtractCups(1);
+        machineMoney.addMoney(recipe.showPrice());
         printMachineStatus();
-        int action = inputHelper.getInt("Write action (buy, fill, take)");
+    }
+
+
+    public void showMainMenu() {
+        printMachineStatus();
+        String[] actions = {"buy", "fill", "take"};
+        String action = inputHelper.getString("Write action (buy, fill, take)");
+
+        while (!action.equals("buy") && !action.equals("fill") && !action.equals("take")) {
+            action = inputHelper.getString("Write action (buy, fill, take)");
+        }
+
+
     }
 
     public static void main(String[] args) {
         CoffeeMachine machine = new CoffeeMachine(400, 500, 120, 550, 9);
-        machine.showMenu();
+        machine.showMainMenu();
     }
 }
 
