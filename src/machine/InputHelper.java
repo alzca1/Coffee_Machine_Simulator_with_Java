@@ -2,8 +2,8 @@ package machine;
 
 import java.util.Scanner;
 
-public class InputHelper {
-    private final Scanner scanner = new Scanner(System.in);
+public class InputHelper{
+    private static final Scanner scanner = new Scanner(System.in);
 
     public int getInt(String message){
         System.out.println(message);
@@ -15,7 +15,7 @@ public class InputHelper {
         return scanner.nextLine();
     }
 
-    public void closeScanner(){
+    public static void closeScanner(){
         scanner.close();
     }
 }

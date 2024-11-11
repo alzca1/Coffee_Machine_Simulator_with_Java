@@ -1,27 +1,36 @@
 package machine;
 
-public class CoffeeRecipe {
-    private int necessaryWater;
-    private int necessaryMilk;
-    private int necessaryCoffeeBeans;
+public enum CoffeeRecipe {
 
-    public CoffeeRecipe(){
-        this.necessaryWater = 200;
-        this.necessaryMilk = 50;
-        this.necessaryCoffeeBeans = 15;
+    ESPRESSO(250, 0, 16, 4),
+    LATTE(350,75, 20, 7 ),
+    CAPUCCINO(200, 100, 12, 6);
+
+
+    private final int waterAmount;
+    private final int milkAmount;
+    private final int coffeeBeansAmount;
+    private final int price;
+
+    CoffeeRecipe(int waterAmount, int milkAmount, int coffeeBeansAmount, int price){
+        this.waterAmount = waterAmount;
+        this.milkAmount = milkAmount;
+        this.coffeeBeansAmount = coffeeBeansAmount;
+        this.price = price;
     }
 
-
-    public int water(){
-        return necessaryWater;
+    public int showWater(){
+        return waterAmount;
+    }
+    public int showMilk(){
+        return milkAmount;
     }
 
-    public int milk() {
-        return necessaryMilk;
+    public int showCoffeeBeans(){
+        return coffeeBeansAmount;
     }
 
-    public int coffeeBeans(){
-        return necessaryCoffeeBeans;
+    public int showPrice(){
+        return price;
     }
-
 }
