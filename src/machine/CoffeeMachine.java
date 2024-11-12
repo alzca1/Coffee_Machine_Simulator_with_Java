@@ -32,8 +32,17 @@ public class CoffeeMachine {
         System.out.println();
     }
 
+    public void showWrongAction(){
+        System.out.println("Wrong action!");
+    }
+
     public void coffeeMenu() {
         int action = inputHelper.getInt("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino");
+
+        while(action != 1 && action != 2 && action != 3){
+           showWrongAction();
+            action = inputHelper.getInt("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino");
+        }
 
         switch(action){
             case 1:
@@ -46,9 +55,11 @@ public class CoffeeMachine {
                 prepareCoffee(CoffeeRecipe.CAPUCCINO);
                 break;
             default:
-                System.out.println("Wrong action!");
+                showWrongAction();
         }
     }
+
+
 
     public void prepareCoffee(CoffeeRecipe recipe){
         water.subtractAmount(recipe.showWater());
@@ -59,6 +70,22 @@ public class CoffeeMachine {
         printMachineStatus();
     }
 
+    public void fillMenu(){
+        water.addAmount();
+        milk.addAmount();
+        coffeebeans.addAmount();
+        disposableCups.addCups();
+        System.out.println();
+        printMachineStatus();
+    }
+
+    public void takeMoney(){
+        int moneyToTake = machineMoney.showMoney();
+        System.out.println("I gave you $" + machineMoney.showMoney());
+        machineMoney.subtractMoney(moneyToTake);
+        printMachineStatus();
+    }
+
 
     public void showMainMenu() {
         printMachineStatus();
@@ -66,18 +93,31 @@ public class CoffeeMachine {
         String action = inputHelper.getString("Write action (buy, fill, take)");
 
         while (!action.equals("buy") && !action.equals("fill") && !action.equals("take")) {
+            showWrongAction();
             action = inputHelper.getString("Write action (buy, fill, take)");
+        }
+
+        switch(action){
+            case "buy":
+                coffeeMenu();
+                break;
+            case "fill":
+                fillMenu();
+                break;
+            case "take":
+                takeMoney();
+                break;
+            default:
+                showWrongAction();
         }
 
 
     }
 
     public static void main(String[] args) {
-        CoffeeMachine machine = new CoffeeMachine(400, 500, 120, 550, 9);
+        CoffeeMachine machine = new CoffeeMachine(400, 540, 120, 550, 9);
         machine.showMainMenu();
     }
 }
 
 
-// creamos una clase que sea MachineMenu
-// en esta clase se instancian los ingredientes, las copas y el dinero

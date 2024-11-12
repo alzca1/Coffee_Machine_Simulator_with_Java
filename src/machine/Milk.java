@@ -2,8 +2,10 @@ package machine;
 
 public class Milk implements Ingredient{
     private int amount;
+    private InputHelper inputHelper;
     public Milk (int amount){
         this.amount = amount;
+        inputHelper = new InputHelper();
     }
 
     @Override
@@ -12,8 +14,9 @@ public class Milk implements Ingredient{
     }
 
     @Override
-    public void addAmount(int amountToAdd){
-        amount += amountToAdd;
+    public void addAmount(){
+        int amountToAdd = inputHelper.getInt("Write how many ml of milk you want to add:");
+        this.amount += amountToAdd;
     }
 
     @Override
@@ -23,6 +26,10 @@ public class Milk implements Ingredient{
 
     @Override
     public void subtractAmount(int amountToSubtract){
-        this.amount -= amountToSubtract;
+
+        if (this.amount > amountToSubtract) {
+            this.amount -= amountToSubtract;
+            return;
+        }
     }
 }

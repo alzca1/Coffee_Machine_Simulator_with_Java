@@ -16,7 +16,7 @@ public class MachineMoney {
     }
 
     public void subtractMoney(int amountToSubtract){
-        if(amount > amountToSubtract){
+        if(amount >= amountToSubtract){
             amount -= amountToSubtract;
             return;
         }
