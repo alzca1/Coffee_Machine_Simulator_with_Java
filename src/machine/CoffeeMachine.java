@@ -30,74 +30,110 @@ public class CoffeeMachine {
         machineMoney.printStatus();
 
         System.out.println();
+        showMainMenu();
     }
 
-    public void showWrongAction(){
+    public void showWrongAction() {
         System.out.println("Wrong action!");
     }
 
     public void coffeeMenu() {
-        int action = inputHelper.getInt("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino");
+        String action = inputHelper.getString("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:");
 
-        while(action != 1 && action != 2 && action != 3){
-           showWrongAction();
-            action = inputHelper.getInt("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino");
+        while (!action.equals("1") && !action.equals("2") && !action.equals("3") && !action.equals("back")) {
+            showWrongAction();
+            action = inputHelper.getString("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:");
         }
 
-        switch(action){
-            case 1:
+        switch (action) {
+            case "1":
                 prepareCoffee(CoffeeRecipe.ESPRESSO);
                 break;
-            case 2:
+            case "2":
                 prepareCoffee(CoffeeRecipe.LATTE);
                 break;
-            case 3:
+            case "3":
                 prepareCoffee(CoffeeRecipe.CAPUCCINO);
                 break;
+            case "back":
+                showMainMenu();
             default:
                 showWrongAction();
         }
     }
 
+    private boolean canPrepareCoffee(CoffeeRecipe recipe) {
+        if (water.showAmount() < recipe.showWater()) {
+            System.out.println("Sorry, not enough water!");
+            return false;
+        }
+
+        if (milk.showAmount() < recipe.showMilk()) {
+            System.out.println("Sorry, not enough milk!");
+            return false;
+        }
+
+        if (coffeebeans.showAmount() < recipe.showCoffeeBeans()) {
+            System.out.println("Sorry, not enough coffee beans!");
+            return false;
+        }
+
+        if (disposableCups.showCups() < 1) {
+            System.out.println("Sorry, not enough disposable cups!");
+            return false;
+        }
+
+        return true;
+    }
 
 
-    public void prepareCoffee(CoffeeRecipe recipe){
+    public void prepareCoffee(CoffeeRecipe recipe) {
+        boolean canBeMade = canPrepareCoffee(recipe);
+        if (!canBeMade) {
+            showMainMenu();
+            return;
+        }
+        System.out.println("I have enough resources, making you a coffee!");
         water.subtractAmount(recipe.showWater());
         milk.subtractAmount(recipe.showMilk());
         coffeebeans.subtractAmount(recipe.showCoffeeBeans());
         disposableCups.subtractCups(1);
         machineMoney.addMoney(recipe.showPrice());
-        printMachineStatus();
+        showMainMenu();
     }
 
-    public void fillMenu(){
+    public void fillMenu() {
         water.addAmount();
         milk.addAmount();
         coffeebeans.addAmount();
         disposableCups.addCups();
         System.out.println();
-        printMachineStatus();
+        showMainMenu();
     }
 
-    public void takeMoney(){
+    public void takeMoney() {
         int moneyToTake = machineMoney.showMoney();
         System.out.println("I gave you $" + machineMoney.showMoney());
         machineMoney.subtractMoney(moneyToTake);
-        printMachineStatus();
+        showMainMenu();
+    }
+
+    public void exit() {
+        return;
     }
 
 
     public void showMainMenu() {
-        printMachineStatus();
-        String[] actions = {"buy", "fill", "take"};
-        String action = inputHelper.getString("Write action (buy, fill, take)");
+        String[] actions = {"buy", "fill", "take", "remaining"};
+        String action = inputHelper.getString("Write action (buy, fill, take, remaining, exit)");
 
-        while (!action.equals("buy") && !action.equals("fill") && !action.equals("take")) {
+        while (!action.equals("buy") && !action.equals("fill") && !action.equals("take") && !action.equals("remaining") && !action.equals("exit")) {
             showWrongAction();
-            action = inputHelper.getString("Write action (buy, fill, take)");
+            action = inputHelper.getString("Write action (buy, fill, take, remaining, exit)");
         }
 
-        switch(action){
+
+        switch (action) {
             case "buy":
                 coffeeMenu();
                 break;
@@ -107,8 +143,15 @@ public class CoffeeMachine {
             case "take":
                 takeMoney();
                 break;
+            case "remaining":
+                printMachineStatus();
+                break;
+            case "exit":
+                exit();
+                break;
             default:
                 showWrongAction();
+                break;
         }
 
 
